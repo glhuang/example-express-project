@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 const Hello = React.createClass({
   render() {
     return (
-      <h1>HEllo Worldzzz</h1>
+      <h1>React Boilerplate</h1>
     );
   },
 });
