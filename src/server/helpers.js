@@ -13,4 +13,4 @@ export function template() {
       </body>
     </html>
   `
-};
+}

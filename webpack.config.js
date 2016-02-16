@@ -5,7 +5,7 @@ module.exports = {
   entry: path.join(__dirname, 'src', 'client', 'entry.js'),
   output: {
     path: path.join(__dirname, 'build'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     loaders: [

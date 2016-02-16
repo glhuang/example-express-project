@@ -8,7 +8,7 @@ app.use('/build', express.static('build'));
 app.use('/api', api(app));
 
 app.get('*', (req, res) => {
-  res.send(template())
-})
+  res.send(template());
+});
 
 app.listen(3000);
