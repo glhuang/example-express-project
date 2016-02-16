@@ -15,6 +15,7 @@ export default React.createClass({
     return (
       <div>
         <h1 className="text-center">Beer Search App</h1>
+        <p className="text-center">Beers in this search: {beers.length}</p>
         <SearchBox handleSubmit={this.handleSubmit} />
         <Beers beers={beers} />
       </div>

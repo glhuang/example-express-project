@@ -5,9 +5,11 @@ const Beer = React.createClass({
   render() {
     const { beer } = this.props;
     return (
-      <div className="small-4 columns beer">
-        <h3>{beer.nameDisplay}</h3>
-        <p>{beer.description}</p>
+      <div className="small-4 columns beer-wrap">
+        <div className="beer">
+          <h3>{beer.nameDisplay}</h3>
+          <p>{beer.description}</p>
+        </div>
       </div>
     );
   },
