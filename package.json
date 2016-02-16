@@ -17,6 +17,7 @@
     "request": "^2.69.0",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
+    "superagent": "^1.7.2",
     "webpack": "^1.12.13"
   },
   "devDependencies": {

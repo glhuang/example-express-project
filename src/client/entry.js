@@ -3,20 +3,9 @@ require('./styles/app.scss');
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const SearchBox = React.createClass({
-  render() {
-    return (
-      <div className="search-box">
-        <h1>Input your beer</h1>
-        <input
-          placeholder="Beer"
-        />
-      </div>
-    );
-  },
-});
+import App from './containers/App';
 
 ReactDOM.render(
-  <SearchBox />,
+  <App />,
   document.getElementById('app')
 );

@@ -13,12 +13,12 @@ export default function(app) {
       qs: {
         key: SECRETS.BREWERY_DB_API_KEY,
         type: 'beer',
-        q: 'Goosinator',
+        q: req.query.searchVal,
       },
     }, (error, response, body) => {
       const parsedRes = JSON.parse(response.body);
       res.send({
-        entities: parsedRes.data,
+        entities: parsedRes.data
       });
     });
   });
