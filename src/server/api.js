@@ -17,9 +17,13 @@ export default function(app) {
       },
     }, (error, response, body) => {
       const parsedRes = JSON.parse(response.body);
-      res.send({
-        entities: parsedRes.data
-      });
+      if (parsedRes.data) {
+        res.send({
+          entities: parsedRes.data
+        });
+      } else {
+        res.status(404).send();
+      }
     });
   });
   return api;

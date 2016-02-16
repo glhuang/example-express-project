@@ -16,7 +16,6 @@ export default React.createClass({
   },
 
   render() {
-    const { isSubmitting } = this.props;
     return (
       <div className="search-box">
         <h2 className="header">Input your beer</h2>
