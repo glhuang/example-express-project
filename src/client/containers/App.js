@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchBox from '../components/SearchBox';
+import UserInfo from '../components/UserInfo';
 import request from 'superagent';
 
 export default React.createClass({
@@ -19,7 +20,6 @@ export default React.createClass({
       .end((err, res) => {
         const { statusCode, entities, message } = res.body;
         if (statusCode === 200) {
-          debugger
           const { userInfo } = entities;
           this.setState({
             isSubmitting: false,
@@ -27,7 +27,6 @@ export default React.createClass({
             userInfo
           });
         } else {
-          debugger
           this.setState({
             isSubmitting: false,
             hasError: true,
@@ -61,10 +60,14 @@ export default React.createClass({
   },
 
   render() {
+    const { userInfo } = this.state;
     return (
       <div>
         <h1 className="text-center">Search Twitter User</h1>
         {this.renderSearchBox()}
+        {
+          userInfo ? <UserInfo userInfo={userInfo} /> : null
+        }
         {this.renderError()}
       </div>
     );
