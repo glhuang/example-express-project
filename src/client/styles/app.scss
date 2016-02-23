@@ -20,6 +20,17 @@
   }
 }
 
+.tweet-wrap {
+  height: 200px;
+  margin: 10px 0;
+  .tweet {
+    height: 100%;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+  }
+}
+
 .search-box.spin {
   line-height: 200px;
 }

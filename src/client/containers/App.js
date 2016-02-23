@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBox from '../components/SearchBox';
 import UserInfo from '../components/UserInfo';
+import Tweets from '../components/Tweets';
 import request from 'superagent';
 
 export default React.createClass({
@@ -9,6 +10,7 @@ export default React.createClass({
       userInfo: null,
       isSubmitting: false,
       hasError: false,
+      recentTweets: [],
     };
   },
 
@@ -20,11 +22,12 @@ export default React.createClass({
       .end((err, res) => {
         const { statusCode, entities, message } = res.body;
         if (statusCode === 200) {
-          const { userInfo } = entities;
+          const { userInfo, recentTweets } = entities;
           this.setState({
             isSubmitting: false,
             hasError: false,
-            userInfo
+            userInfo,
+            recentTweets
           });
         } else {
           this.setState({
@@ -60,13 +63,18 @@ export default React.createClass({
   },
 
   render() {
-    const { userInfo } = this.state;
+    const { userInfo, recentTweets } = this.state;
     return (
       <div>
         <h1 className="text-center">Search Twitter User</h1>
         {this.renderSearchBox()}
         {
           userInfo ? <UserInfo userInfo={userInfo} /> : null
+        }
+        {
+          recentTweets.length > 0
+          ? <Tweets tweets={recentTweets} />
+          : null
         }
         {this.renderError()}
       </div>

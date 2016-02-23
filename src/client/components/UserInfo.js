@@ -4,7 +4,6 @@ export default React.createClass({
 
   render() {
     const { userInfo } = this.props;
-    console.log(userInfo)
     return (
       <div className="profile">
         <h3>{userInfo.name}</h3>
