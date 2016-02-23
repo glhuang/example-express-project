@@ -1,12 +1,11 @@
 import React from 'react';
 import SearchBox from '../components/SearchBox';
-import Beers from '../components/Beers';
 import request from 'superagent';
 
 export default React.createClass({
   getInitialState() {
     return {
-      beers: [],
+      userInfo: null,
       isSubmitting: false,
       hasError: false,
     };
@@ -15,21 +14,24 @@ export default React.createClass({
   handleSubmit(searchVal) {
     this.setState({ isSubmitting: true });
     request
-      .get('/api/search')
+      .get('/api/users')
       .query({ searchVal })
       .end((err, res) => {
-        if (res.statusCode === 404) {
+        const { statusCode, entities, message } = res.body;
+        if (statusCode === 200) {
+          debugger
+          const { userInfo } = entities;
           this.setState({
-            beers: [],
-            isSubmitting: false,
-            hasError: true,
-          });
-        } else {
-          const beers = res.body.entities;
-          this.setState({
-            beers,
             isSubmitting: false,
             hasError: false,
+            userInfo
+          });
+        } else {
+          debugger
+          this.setState({
+            isSubmitting: false,
+            hasError: true,
+            errors: [message]
           });
         }
       });
@@ -59,14 +61,11 @@ export default React.createClass({
   },
 
   render() {
-    const { beers } = this.state;
     return (
       <div>
-        <h1 className="text-center">Beer Search App</h1>
-        <p className="text-center">Beers in this search: {beers.length}</p>
+        <h1 className="text-center">Search Twitter User</h1>
         {this.renderSearchBox()}
         {this.renderError()}
-        <Beers beers={beers} />
       </div>
     );
   },

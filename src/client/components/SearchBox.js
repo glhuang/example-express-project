@@ -18,10 +18,10 @@ export default React.createClass({
   render() {
     return (
       <div className="search-box">
-        <h2 className="header">Input your beer</h2>
+        <h2 className="header">Twitter Handle</h2>
         <form onSubmit={this.handleSubmit}>
           <input onChange={(e) => this.setState({searchValue: e.target.value})}
-            placeholder="Beer"
+            placeholder="twitter handle"
           />
           <div>
             <button className="button success">Search</button>

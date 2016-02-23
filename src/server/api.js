@@ -2,28 +2,42 @@ import { Router } from 'express';
 import request from 'request';
 import SECRETS from './config/secrets.json';
 
-const BREWERY_DB_URL = 'http://api.brewerydb.com/v2/';
+const TWITTER_USERS_URL = 'https://api.twitter.com/1.1/users/show.json';
 
 export default function(app) {
   const api = Router();
 
-  api.get('/search', (req, res) => {
+  api.get('/users', (req, res) => {
+    const oauth = {
+      consumer_key: SECRETS.CONSUMER_KEY,
+      consumer_secret: SECRETS.CONSUMER_SECRET_KEY,
+      token: SECRETS.ACCESS_KEY,
+      token_secret: SECRETS.ACCESS_TOKEN_SECRET,
+    };
+
     request.get({
-      url: `${BREWERY_DB_URL}/search`,
+      url: `${TWITTER_USERS_URL}`,
+      oauth,
+      json: true,
       qs: {
-        key: SECRETS.BREWERY_DB_API_KEY,
-        type: 'beer',
-        q: req.query.searchVal,
+        screen_name: req.query.searchVal,
       },
     }, (error, response, body) => {
-      const parsedRes = JSON.parse(response.body);
-      if (parsedRes.data) {
+      if (response.statusCode === 404) {
         res.send({
-          entities: parsedRes.data
-        });
+          statusCode: 404,
+          message: 'User Not Found'
+        })
       } else {
-        res.status(404).send();
+        const userInfo = body;
+        res.send({
+          statusCode: 200,
+          entities: {
+            userInfo
+          }
+        })
       }
+
     });
   });
   return api;
